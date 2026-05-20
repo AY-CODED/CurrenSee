@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "849323926155",
+    "project_id": "currensee-backend-ce094",
+    "storage_bucket": "currensee-backend-ce094.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849323926155:android:49761d0a225825e5b32a8e",
+        "android_client_info": {
+          "package_name": "com.aptech.currensee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849323926155-m5kjvn20kadkgu6nq60r3jp9d4ic8hg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaqsnC-qJ8yOecvKUqv21B7ufISflcqkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849323926155-m5kjvn20kadkgu6nq60r3jp9d4ic8hg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849323926155:android:f5c28316615f14d8b32a8e",
+        "android_client_info": {
+          "package_name": "com.example.currensee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849323926155-m5kjvn20kadkgu6nq60r3jp9d4ic8hg7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaqsnC-qJ8yOecvKUqv21B7ufISflcqkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849323926155-m5kjvn20kadkgu6nq60r3jp9d4ic8hg7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
