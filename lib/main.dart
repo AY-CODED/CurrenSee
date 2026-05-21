@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
-
+import 'screens/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +14,10 @@ class CurrenSee extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'CurrenSee', debugShowCheckedModeBanner: false);
+    return MaterialApp(
+      title: 'CurrenSee',
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen(),
+    );
   }
 }
