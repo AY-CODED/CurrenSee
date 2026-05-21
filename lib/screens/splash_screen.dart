@@ -40,6 +40,14 @@ class _SplashScreenState extends State<SplashScreen> {
               decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(12),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: const Offset(0, 3)
+                  )
+                ]
               ),
               // transform: Matrix4.rotationZ(0.8),
               child: const Icon(
@@ -72,10 +80,16 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
 
             const SizedBox(height: 10),
-            SizedBox(
-              width: 90, // set desired width
-              child: LinearProgressIndicator(
-                color: Color.fromARGB(255, 74, 36, 192),
+            Container(
+              width: 90,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(2),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4),
+                child: const LinearProgressIndicator(
+                  color: Color.fromARGB(255, 74, 36, 192),
+                ),
               ),
             ),
           ],
