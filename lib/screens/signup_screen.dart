@@ -18,7 +18,9 @@ class _SignupScreenState extends State<SignupScreen> {
         child: Padding(
           padding: const EdgeInsets.all(20),
           child: Column(
-            children: const [],
+            children: const [
+              Text('Please work')
+            ],
           ),
         ),
       ),
