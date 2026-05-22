@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  final String label;
+
+class CustomsTextField extends StatelessWidget {
+  // final String label;
   final String hint;
   final bool obscure;
   final TextEditingController? controller;
 
-  const CustomTextField({
+  const CustomsTextField({
     super.key,
-    required this.label,
     required this.hint,
     this.obscure = false,
     this.controller,
@@ -19,7 +19,7 @@ class CustomTextField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        
         const SizedBox(height: 5),
         TextField(
           controller: controller,
@@ -43,6 +43,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 15),
+        
       ],
     );
   }

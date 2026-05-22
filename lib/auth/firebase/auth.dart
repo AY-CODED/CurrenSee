@@ -1,23 +1,33 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-// Note: mobile Google Sign-In configuration removed to avoid API mismatch
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Auth {
-  // Dependencies Instances
+  // Firebase instance
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  // Initializing GoogleSignIn with explicit scopes
-  final GoogleSignIn _googleSignIn = GoogleSignIn.standard(
-    scopes: ['email', 'https://www.googleapis.com/auth/contacts.readonly'],
-  );
+  // Google Sign In singleton (v7+)
+  final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
-  // Expose current authenticated user instance
+  Auth() {
+    // Required initialization for google_sign_in v7+
+    _initializeGoogleSignIn();
+  }
+
+  Future<void> _initializeGoogleSignIn() async {
+    await _googleSignIn.initialize();
+  }
+
+  // Current user
   User? get currentUser => _firebaseAuth.currentUser;
 
-  // Stream listening to real-time auth state updates
-  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
+  // Auth state stream
+  Stream<User?> get authStateChanges =>
+      _firebaseAuth.authStateChanges();
 
-  /// EMAIL & PASSWORD SIGN IN
+  // =========================
+  // EMAIL SIGN IN
+  // =========================
   Future<UserCredential> signInWithEmailAndPassword({
     required String email,
     required String password,
@@ -28,7 +38,9 @@ class Auth {
     );
   }
 
-  /// REGISTER WITH EMAIL & PASSWORD
+  // =========================
+  // CREATE ACCOUNT
+  // =========================
   Future<UserCredential> createUserWithEmailAndPassword({
     required String email,
     required String password,
@@ -39,64 +51,77 @@ class Auth {
     );
   }
 
-  /// GOOGLE SIGN IN (Cross-Platform Ready)
+  // =========================
+  // GOOGLE SIGN IN
+  // =========================
   Future<UserCredential> signInWithGoogle() async {
     try {
-      // 1. Web Platform Workflow
-      if (kIsWeb) {
-        final googleProvider = GoogleAuthProvider();
-        return await _firebaseAuth.signInWithPopup(googleProvider);
-      }
+      // Authenticate user
+      final GoogleSignInAccount googleUser =
+          await _googleSignIn.authenticate();
 
-      // 2. Mobile Platforms Workflow (Android/iOS)
-      // Mobile native Google Sign-In must be implemented using the
-      // `google_sign_in` package. To avoid depending on a specific
-      // package version here, the mobile flow is left as a TODO.
-      throw UnimplementedError(
-        'Mobile Google Sign-In is not configured. Add google_sign_in integration.',
-      );
+      // Request scopes for access token
+      final GoogleSignInClientAuthorization? authorization =
+          await googleUser.authorizationClient.authorizeScopes([
+        'email',
+        'profile',
+      ]);
 
-      if (googleUser == null) {
-        throw Exception('Sign-in cancelled by user.');
-      }
+      // Access token
+      final String? accessToken = authorization?.accessToken;
 
+      // Get ID token
       final GoogleSignInAuthentication googleAuth =
-          await googleUser.authentication;
+          googleUser.authentication;
 
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
+      // Create Firebase credential
+      final OAuthCredential credential =
+          GoogleAuthProvider.credential(
+        accessToken: accessToken,
         idToken: googleAuth.idToken,
       );
 
-      return await _firebaseAuth.signInWithCredential(credential);
-    } on FirebaseAuthException {
-      rethrow;
+      // Sign into Firebase
+      return await _firebaseAuth.signInWithCredential(
+        credential,
+      );
     } catch (e) {
-      throw Exception('Google Sign-In Exception: $e');
+      throw FirebaseAuthException(
+        code: 'google-sign-in-failed',
+        message: e.toString(),
+      );
     }
   }
 
-  /// APPLE SIGN IN
+  // =========================
+  // APPLE SIGN IN
+  // =========================
   Future<UserCredential> signInWithApple() async {
     try {
       final appleProvider = AppleAuthProvider();
+
       if (kIsWeb) {
-        return await _firebaseAuth.signInWithPopup(appleProvider);
+        return await _firebaseAuth.signInWithPopup(
+          appleProvider,
+        );
       } else {
-        return await _firebaseAuth.signInWithProvider(appleProvider);
+        return await _firebaseAuth.signInWithProvider(
+          appleProvider,
+        );
       }
-    } on FirebaseAuthException {
-      rethrow;
     } catch (e) {
-      throw Exception('Apple Sign-In Exception: $e');
+      throw FirebaseAuthException(
+        code: 'apple-sign-in-failed',
+        message: e.toString(),
+      );
     }
   }
 
-  /// GLOBAL SIGN OUT
+  // =========================
+  // SIGN OUT
+  // =========================
   Future<void> signOut() async {
-    try {
-      // If using `google_sign_in`, sign out from it here.
-    } catch (_) {}
+    await _googleSignIn.signOut();
     await _firebaseAuth.signOut();
   }
 }

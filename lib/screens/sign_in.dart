@@ -1,6 +1,8 @@
 // import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+// import 'package:currensee/widgets/_buildTextField.dart';
+import 'package:currensee/widgets/_buildsign.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -89,28 +91,25 @@ class _SignInState extends State<SignIn>
                   child:
                   Column(
                     children: [
-                     Container(
-                       color: Colors.white,
-                      height: 150,
-                      child:
-                      const Center(
-                      child: Text(
-                      'Reliable, accurate, and instant\nfinancial data for your global\ntransactions',
-                      textAlign: TextAlign.center, // Centers the actual lines of text cleanly
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontFamily: 'Inter', // Capitalized 'Inter' (matching typical pubspec configuration)
-                        fontSize: 16,
-                        height: 1.5, // Improves line spacing for reading comfort
-                        fontWeight: FontWeight.w600,
-                      ),
-                      ),
+                      // color : Colors.white,
+                      CustomsTextField( hint: 'Email Address',),
+                      CustomsTextField( hint: 'Enter Password'),
 
-                      ),
+                      SizedBox(width: 29,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [        const Text( 
+                        "FORGOT PASSWORD",
+                        style:TextStyle(
+                          color: Color.fromRGBO(69, 30, 187, 1),
+                          
+                          
+                        ) ,
+                      )]
+                      )
 
+                    ]
 
-                     ),
-                    ],
                   )
                 )
                ],

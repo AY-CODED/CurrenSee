@@ -1,7 +1,7 @@
 // import 'package:currensee/screens/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:currensee/auth/firebase/auth.dart';
-import 'package:currensee/widgets/_buildTextField.dart'; // Ensure this path is correct
+import 'package:currensee/widgets/_buildtextfield.dart'; // Ensure this path is correct
 import 'package:currensee/screens/home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
