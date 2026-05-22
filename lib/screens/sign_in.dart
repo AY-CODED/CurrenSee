@@ -14,7 +14,7 @@ class _SignInState extends State<SignIn>{
     return Scaffold(
       body: SafeArea(child:SingleChildScrollView(
 
-        child:Padding(padding: const EdgeInsets.all(8),
+        child:Padding(padding: const EdgeInsets.all(0),
         child: Column(
           children: [
             Container(
@@ -22,7 +22,8 @@ class _SignInState extends State<SignIn>{
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.deepPurple, // Use a gradient for the wave effect
-                borderRadius: BorderRadius.circular(30),
+                borderRadius:BorderRadius.only(topLeft: Radius.circular(30),topRight:Radius.circular(30), ),
+
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -30,12 +31,12 @@ class _SignInState extends State<SignIn>{
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(22.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(12),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(16),
@@ -43,11 +44,12 @@ class _SignInState extends State<SignIn>{
                       child: const Icon(Icons.auto_awesome, color: Colors.white, size: 30),
                     ),
                     const Spacer(),
+                    const SizedBox(height: 20,),
                     const Text(
                       "CurrenSee",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 32,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -55,7 +57,7 @@ class _SignInState extends State<SignIn>{
                       "Premium financial experiences.",
                       style: TextStyle(
                         color: Colors.white70,
-                        fontSize: 18,
+                        fontSize: 15,
                       ),
                     ),
                   ],
