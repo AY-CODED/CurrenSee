@@ -1,10 +1,8 @@
-import 'package:currensee/screens/sign_in.dart';
+// import 'package:currensee/screens/sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:currensee/auth/firebase/auth.dart';
-import 'package:currensee/widgets/_buildTextField.dart';
+import 'package:currensee/widgets/_buildTextField.dart'; // Ensure this path is correct
 import 'package:currensee/screens/home_screen.dart';
-// Add your import for the Auth class file
-// import 'package:currensee/services/auth.dart'; 
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -14,7 +12,6 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
-  // Initialize your Auth service
   final Auth _auth = Auth();
 
   final TextEditingController _emailController = TextEditingController();
@@ -23,38 +20,36 @@ class _SignupScreenState extends State<SignupScreen> {
 
   bool _isLoading = false;
 
- Future<void> _signUp() async {
-  if (_passwordController.text != _confirmPasswordController.text) {
-    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
-    return;
-  }
+  Future<void> _signUp() async {
+    if (_passwordController.text != _confirmPasswordController.text) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
+      return;
+    }
 
-  setState(() => _isLoading = true);
+    setState(() => _isLoading = true);
 
-  try {
-    await _auth.createUserWithEmailAndPassword(
-      email: _emailController.text.trim(),
-      password: _passwordController.text.trim(),
-    );
-
-    // After success, navigate to HomeScreen
-    if (mounted) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+    try {
+      await _auth.createUserWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
       );
-    }
-  } catch (e) {
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-    }
-  } finally {
-    if (mounted) {
-      setState(() => _isLoading = false);
+
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
     }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +64,6 @@ class _SignupScreenState extends State<SignupScreen> {
               const Text('CurrenSee', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF5D3FD3))),
               const SizedBox(height: 10),
               const Text('Join CurrenSee', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-              const Text('The prestige of secure wealth.', style: TextStyle(color: Colors.grey)),
               const SizedBox(height: 20),
               Container(
                 padding: const EdgeInsets.all(20),
@@ -77,58 +71,66 @@ class _SignupScreenState extends State<SignupScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CustomTextField(
-                    label: 'Full Name', 
-                    hint: 'Alexander Sterling'
-                  ),
-                  CustomTextField(
-                    label: 'Email', 
-                    hint: 'alex@premium.com', 
-                    controller: _emailController
-                  ),
-                  CustomTextField(
-                    label: 'Password', 
-                    hint: '••••••••', 
-                    obscure: true, 
-                    controller: _passwordController
-                  ),
-                  CustomTextField(
-                    label: 'Confirm', 
-                    hint: '••••••••', 
-                    obscure: true, 
-                    controller: _confirmPasswordController
-                  ),
+                    const CustomTextField(label: 'Full Name', hint: 'Alexander Sterling'),
+                    CustomTextField(label: 'Email', hint: 'alex@premium.com', controller: _emailController),
+                    CustomTextField(label: 'Password', hint: '••••••••', obscure: true, controller: _passwordController),
+                    CustomTextField(label: 'Confirm', hint: '••••••••', obscure: true, controller: _confirmPasswordController),
                     const SizedBox(height: 20),
                     SizedBox(
-                      width: double.infinity, 
-                      height: 50, 
+                      width: double.infinity,
+                      height: 50,
                       child: ElevatedButton(
-                      onPressed: _isLoading ? null : _signUp,
-                      style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF5D3FD3)),
-                      child: Text(
-                        _isLoading ? 'Signing Up...' : 'Sign Up',
-                        style: const TextStyle(color: Colors.white, fontSize: 18),
+                        onPressed: _isLoading ? null : _signUp,
+                        style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF5D3FD3)),
+                        child: Text(_isLoading ? 'Signing Up...' : 'Sign Up', style: const TextStyle(color: Colors.white, fontSize: 18)),
                       ),
                     ),
-                  ),
                     const SizedBox(height: 20),
                     Row(children: [const Expanded(child: Divider()), const Padding(padding: EdgeInsets.symmetric(horizontal: 8), child: Text('OR CONTINUE WITH')), const Expanded(child: Divider())]),
                     const SizedBox(height: 20),
-                    Row(children: [Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.g_mobiledata,), label: const Text('Google'))), const SizedBox(width: 10), Expanded(child: OutlinedButton.icon(onPressed: () {}, icon: const Icon(Icons.apple,), label: const Text('Apple')))]),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const SignIn()));
-                        },
-                        child: const Text('Already have an account? Log In'),
+                    Row(children: [
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () async {
+                            try {
+                              final userCredential = await _auth.signInWithGoogle();
+                              if (userCredential.user != null && mounted) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const HomeScreen()),
+                                );
+                              }
+                            } catch (e) {
+                              if (mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(content: Text(e.toString())),
+                                );
+                              }
+                            }
+                          },
+                          icon: const Icon(Icons.g_mobiledata),
+                          label: const Text('Google'),
+                        ),
                       ),
-                    )
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () async {
+                            try {
+                              await _auth.signInWithApple();
+                              if (mounted) Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                            } catch (e) {
+                              if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+                            }
+                          },
+                          icon: const Icon(Icons.apple),
+                          label: const Text('Apple'),
+                        ),
+                      ),
+                    ]),
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              const Row(mainAxisAlignment: MainAxisAlignment.center, children: [Icon(Icons.lock_outline, size: 14, color: Colors.grey), SizedBox(width: 5), Text('End-to-end institutional grade encryption', style: TextStyle(color: Colors.grey))])
             ],
           ),
         ),
