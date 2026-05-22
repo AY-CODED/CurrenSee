@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:currensee/screens/signup_screen.dart';
+import 'sign_in.dart';
 import 'package:flutter/material.dart';
 // import 'sign_in.dart';
 class SplashScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(const Duration(seconds: 2), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const SignupScreen()),
+        MaterialPageRoute(builder: (context) => const SignIn()),
       );
     });
   }
