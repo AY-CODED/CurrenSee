@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,8 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignInState extends State<SignIn>
+ {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +58,7 @@ class _SignInState extends State<SignIn> {
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),
-                          child: const Icon(Icons.auto_awesome, color: Colors.white, size: 30),
+                          child: const Icon(Icons.currency_exchange, color: Colors.white, size: 30),
                         ),
                         const Spacer(),
                         const Text(
