@@ -13,8 +13,7 @@ class _SignInState extends State<SignIn>{
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(child:SingleChildScrollView(
-
-        child:Padding(padding: const EdgeInsets.all(0),
+        child:Padding(padding: const EdgeInsets.all(25),
         child: Column(
           children: [
             Container(
