@@ -123,7 +123,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
                             }
                           },
-                          icon: const Icon(Icons.apple),
+                          icon: const Icon(Icons.apple, color: Colors.grey,),
                           label: const Text('Apple'),
                         ),
                       ),
