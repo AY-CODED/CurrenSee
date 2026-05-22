@@ -61,14 +61,14 @@ class Auth {
           await _googleSignIn.authenticate();
 
       // Request scopes for access token
-      final GoogleSignInClientAuthorization? authorization =
+      final GoogleSignInClientAuthorization authorization =
           await googleUser.authorizationClient.authorizeScopes([
         'email',
         'profile',
       ]);
 
       // Access token
-      final String? accessToken = authorization?.accessToken;
+      final String? accessToken = authorization.accessToken;
 
       // Get ID token
       final GoogleSignInAuthentication googleAuth =
