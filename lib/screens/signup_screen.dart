@@ -129,37 +129,37 @@ class _SignupScreenState extends State<SignupScreen> {
                         ),
                       ),
                     ]),
+                    const SizedBox(height: 40),
+                    Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Already have an account?"),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignIn(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                "Sign In",
+                                style: TextStyle(
+                                  color: Color(0xFF5D3FD3),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
-              const SizedBox(height: 40),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text("Already have an account?"),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const SignIn(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          "Sign In",
-                          style: TextStyle(
-                            color: Color(0xFF5D3FD3),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              )
             ],
           ),
         ),

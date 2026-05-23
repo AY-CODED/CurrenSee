@@ -154,121 +154,129 @@ Future<void> _signIn() async {
                 // const SizedBox(height: 30),
 
                 // IMPROVEMENT: Improved paragraph text readability and styling
-               Padding(
-                padding: const EdgeInsets.all(25),
-                child: Column(
-                  children: [
-                    CustomsTextField(
-                      controller: _emailController, // Ensure controller is passed
-                      prefixIcon: Icons.mail_outline,
-                      hint: 'Email Address',
-                      isPasswordField: false,
-                    ),
-                    CustomsTextField(
-                      controller: _passwordController, // Ensure controller is passed
-                      prefixIcon: Icons.lock_outline,
-                      hint: 'Enter Password',
-                      isPasswordField: true,
-                    ),
-                    const SizedBox(width: 29),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        const Text(
-                          "FORGOT PASSWORD",
-                          style: TextStyle(
-                            color: Color.fromRGBO(69, 30, 187, 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: _isLoading ? null : _signIn,
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF5D3FD3),
-                        ),
-                        child: _isLoading
-                            ? const CircularProgressIndicator(color: Colors.white)
-                            : const Text(
-                                'Sign In',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                ),
-                              ),
-                      ),
-                    ),
-                    const SizedBox(height: 25),
-                    const Row(
-                      children: [
-                        Expanded(child: Divider()),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
-                          child: Text('OR CONTINUE WITH'),
-                        ),
-                        Expanded(child: Divider()),
-                        ],
-                      ),
-                        const SizedBox(height: 25),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () async {
-                                  // Google Sign-In Logic
-                                },
-                                icon: const Icon(Icons.g_mobiledata),
-                                label: const Text('Google'),
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: OutlinedButton.icon(
-                                onPressed: () async {
-                                  // Apple Sign-In Logic
-                                },
-                                icon: const Icon(Icons.apple, color: Colors.grey),
-                                label: const Text('Apple'),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 25),
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text("Don't have an account? "),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const SignupScreen(),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text(
-                                    "Sign Up",
-                                    style: TextStyle(
-                                      color: Color(0xFF5D3FD3),
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),                   
-                      ],
+              Container(
+  decoration: BoxDecoration(
+    color: Colors.white,
+    borderRadius: BorderRadius.circular(20),
+    boxShadow: [
+      BoxShadow(
+        color: Colors.black.withOpacity(0.08),
+        blurRadius: 20,
+        spreadRadius: 2,
+        offset: const Offset(0, 8),
+      ),
+    ],
+  ),
+  child: Padding(
+    padding: const EdgeInsets.all(25),
+    child: Column(
+      children: [
+        CustomsTextField(
+          controller: _emailController,
+          prefixIcon: Icons.mail_outline,
+          hint: 'Email Address',
+          isPasswordField: false,
+        ),
+        CustomsTextField(
+          controller: _passwordController,
+          prefixIcon: Icons.lock_outline,
+          hint: 'Enter Password',
+          isPasswordField: true,
+        ),
+        const SizedBox(width: 29),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            const Text(
+              "FORGOT PASSWORD",
+              style: TextStyle(
+                color: Color.fromRGBO(69, 30, 187, 1),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 20),
+        SizedBox(
+          width: double.infinity,
+          height: 50,
+          child: ElevatedButton(
+            onPressed: _isLoading ? null : _signIn,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF5D3FD3),
+            ),
+            child: _isLoading
+                ? const CircularProgressIndicator(color: Colors.white)
+                : const Text(
+                    'Sign In',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
                     ),
                   ),
-                  ],
+          ),
+        ),
+        const SizedBox(height: 25),
+        const Row(
+          children: [
+            Expanded(child: Divider()),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8),
+              child: Text('OR CONTINUE WITH'),
+            ),
+            Expanded(child: Divider()),
+          ],
+        ),
+        const SizedBox(height: 25),
+        Row(
+          children: [
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () async {},
+                icon: const Icon(Icons.g_mobiledata),
+                label: const Text('Google'),
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: OutlinedButton.icon(
+                onPressed: () async {},
+                icon: const Icon(Icons.apple, color: Colors.grey),
+                label: const Text('Apple'),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 25),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Don't have an account? "),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignupScreen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: Color(0xFF5D3FD3),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  ),
+)   ],
                 ),
           ),
         ),
