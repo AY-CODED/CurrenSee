@@ -253,7 +253,7 @@ Future<void> _signIn() async {
             const Text("Don't have an account? "),
             MouseRegion(
               cursor: SystemMouseCursors.click,
-              child: GestureDetector(
+              child: GestureDetector( 
                 onTap: () {
                   Navigator.push(
                     context,

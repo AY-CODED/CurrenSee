@@ -74,8 +74,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   children: [
                     const CustomTextField(label: 'Full Name', hint: 'Alexander Sterling'),
                     CustomTextField(label: 'Email', hint: 'alex@premium.com', controller: _emailController),
-                    CustomTextField(label: 'Password', hint: '••••••••', obscure: true, controller: _passwordController),
-                    CustomTextField(label: 'Confirm', hint: '••••••••', obscure: true, controller: _confirmPasswordController),
+                    CustomTextField(label: 'Password', hint: 'Enter Your Password', isPasswordField: true,  controller: _passwordController),
+                    CustomTextField(label: 'Confirm', hint: 'Confirm Your Password', isPasswordField: true, controller: _confirmPasswordController),
                     const SizedBox(height: 20),
                     SizedBox(
                       width: double.infinity,
